@@ -6,7 +6,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/card_view"
         android:layout_margin="5dp"
-        card_view:cardBackgroundColor="#8167B4"
+        card_view:cardBackgroundColor="@color/colorWhite"
         card_view:cardCornerRadius="12dp"
         card_view:cardElevation="3dp"
         card_view:contentPadding="4dp" >
@@ -17,20 +17,21 @@
             android:padding="16dp" >
 
         <ImageView
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:id="@+id/item_image"
 
                 android:layout_centerInParent="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp" android:layout_marginTop="0dp"/>
+               android:layout_marginTop="0dp"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/item_name"
-                android:text="gfdgf"
+                android:text="Name"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
                 android:layout_below="@id/item_image"
 
                 android:layout_alignParentStart="true"
@@ -42,13 +43,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/item_tags"
                 android:layout_alignParentStart="true"
-                android:text="ffdgfgf"
+                android:text="Tag tag tag tag"
                 android:layout_below="@+id/item_name" />
         <TextView
                 android:text="Date"
                 android:layout_width="wrap_content"
-                android:layout_below="@id/item_image"
-                android:layout_alignParentEnd="true"
+                android:layout_below="@id/item_tags"
+                android:layout_alignParentStart="true"
+                android:textStyle="italic"
                 android:layout_height="wrap_content" android:id="@+id/item_date"/>
 
     </RelativeLayout>

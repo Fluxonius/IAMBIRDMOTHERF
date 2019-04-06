@@ -45,7 +45,12 @@ class AddActivity : AppCompatActivity() {
 
 
         addButton.setOnClickListener {
+            if (nameData.text.isNotEmpty() && picData.text.isNotEmpty())
             this.getTagsFromUrl(picData.text.toString())
+        }
+        preButton.setOnClickListener {
+            if (nameData.text.isNotEmpty() && picData.text.isNotEmpty())
+                Picasso.get().load(picData.text.toString()).into(imageView)
         }
 
     }
@@ -60,7 +65,7 @@ class AddActivity : AppCompatActivity() {
             @androidx.annotation.RequiresApi(Build.VERSION_CODES.O)
             override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
 
-                imageView.setImageBitmap(bitmap)
+                //imageView.setImageBitmap(bitmap)
                 val vision = FirebaseVisionImage.fromBitmap(bitmap!!)
                 val labeler = FirebaseVision.getInstance().getOnDeviceImageLabeler()
                 labeler.processImage(vision)
@@ -70,7 +75,7 @@ class AddActivity : AppCompatActivity() {
 
                         val intent = Intent(this@AddActivity, MainActivity::class.java)
 
-                        if (nameData.text.isNotEmpty() && picData.text.isNotEmpty()) {
+
 
 
                             birds.add(
@@ -88,7 +93,7 @@ class AddActivity : AppCompatActivity() {
 
                             setResult(RESULT_OK, intent)
                             finish()
-                        }
+
                     }
                     .addOnFailureListener {
 

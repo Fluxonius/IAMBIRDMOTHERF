@@ -5,7 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".AddActivity">
+        tools:context=".AddActivity"
+        android:background="@color/colorGrayy">
 
     <TextView
             android:text="Name"
@@ -13,7 +14,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/nameText" android:layout_marginTop="40dp"
             app:layout_constraintTop_toTopOf="@+id/guideline" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp"
+            android:textColor="@color/colorPrimary"
+    android:textSize="24dp"/>
     <ImageView
             android:layout_width="278dp"
             android:layout_height="204dp" tools:srcCompat="@tools:sample/avatars"
@@ -31,21 +34,23 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/nameData"
-            android:layout_marginTop="16dp"
             app:layout_constraintTop_toTopOf="@+id/guideline" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="8dp" android:layout_marginTop="40dp"/>
     <TextView
             android:text="PictureUrl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:textColor="@color/colorPrimary"
             android:id="@+id/picText" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintTop_toBottomOf="@+id/nameText" android:layout_marginTop="40dp"/>
     <Button
             android:text="ADD"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/gradient_button"
+            android:textColor="@color/colorWhite"
             android:id="@+id/addButton" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="32dp"/>
     <EditText
             android:layout_width="wrap_content"
@@ -54,14 +59,14 @@
             android:ems="10"
             android:id="@+id/picData" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/nameData"/>
-    <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="37dp"
-            android:id="@+id/textView" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/picData" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/addButton" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"/>
+            app:layout_constraintTop_toBottomOf="@+id/nameData" android:layout_marginTop="24dp"/>
+    <Button
+            android:text="Preview"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/preButton" android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/gradient_button"
+            android:textColor="@color/colorWhite"/>
 </android.support.constraint.ConstraintLayout>
