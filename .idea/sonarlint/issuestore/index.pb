@@ -41,3 +41,7 @@ H
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 u
 Eapp/src/main/java/com/example/iambirdmotherf/SwipeToDeleteCallback.kt,2\e\2eb0054837482213df843d745077e09999723447
+_
+/app/src/main/res/drawable-anydpi/ic_add_img.xml,3\c\3c019e19c66db4e3026dee476b001110227e173a
+R
+"app/src/main/res/values/colors.xml,9\6\969faa2a5d9f5e8390e958d2c07f2cfd54676e6b
