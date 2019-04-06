@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "517747317678",
+    "firebase_url": "https://bird-project-d8c49.firebaseio.com",
+    "project_id": "bird-project-d8c49",
+    "storage_bucket": "bird-project-d8c49.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517747317678:android:c116d8660c94ca02",
+        "android_client_info": {
+          "package_name": "com.example.iambirdmotherf"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIHraYLSArv3jpsxKSbI3LCarDqKVDHZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517747317678-giauuriinnorkoeg8egvf1qgm2ecrr5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

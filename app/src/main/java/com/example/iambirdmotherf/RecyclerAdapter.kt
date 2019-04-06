@@ -24,27 +24,25 @@ class RecyclerAdapter(private val birds:ArrayList<Bird>):RecyclerView.Adapter<Re
            name=itemView.findViewById(R.id.item_name)
             tags=itemView.findViewById(R.id.item_tags)
             dates=itemView.findViewById(R.id.item_date)
-            itemView.setOnClickListener { v: View  ->
-                var position: Int = getAdapterPosition()
-                Snackbar.make(v, "Removed "+birds[position].name,
-                    Snackbar.LENGTH_LONG).setAction("Action", null).show()
-                birds.removeAt(position)
-                notifyDataSetChanged()
 
-            }
 
         }
 
 
         fun bindBird(bird: Bird){
             name.text=bird.name
-            tags.text=bird.tags
             dates.text=bird.date
+            tags.text=bird.tags
             Picasso.get().load(bird.pic).into(pic)
         }
 
 
 }
+    fun removeAt(position: Int) {
+
+        birds.removeAt(position)
+        notifyItemRemoved(position)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val view: View= LayoutInflater.from(parent.context).inflate(R.layout.card_layout,parent,false)
@@ -58,6 +56,8 @@ class RecyclerAdapter(private val birds:ArrayList<Bird>):RecyclerView.Adapter<Re
 
     override fun onBindViewHolder(holder:ViewHolder, pos: Int) {
       holder.bindBird(birds[pos])
+      //  holder.tags.text=labels[pos]
+
 
     }
 

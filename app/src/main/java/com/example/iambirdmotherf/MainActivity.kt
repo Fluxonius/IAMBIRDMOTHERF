@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.Menu
 import android.view.MenuItem
 import com.google.gson.Gson
@@ -16,63 +17,80 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
-    val gson=Gson()
-    var birds:ArrayList<Bird> = ArrayList()
+    val gson = Gson()
+    val jsons = Jsons()
+    var birds = ArrayList<Bird>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         loadDataFromJson("sBird")
 
-        layoutManager = LinearLayoutManager(this)
-        recycler_view.layoutManager = layoutManager
-        adapter = RecyclerAdapter(birds)
-        recycler_view.adapter = adapter
 
+
+        recycler_view.layoutManager = LinearLayoutManager(this)
+
+        recycler_view.adapter = RecyclerAdapter(birds)
+        val swipeHandler = object : SwipeToDeleteCallback(this) {
+            override fun onSwiped(p0: RecyclerView.ViewHolder, p1: Int) {
+                val adapter = recycler_view.adapter as RecyclerAdapter
+                adapter.removeAt(p0.adapterPosition)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(recycler_view)
 
     }
+
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        val sBirds=gson.toJson(birds)
-        outState?.putString("isBirds",sBirds)
+        outState?.putString("isBirds", jsons.arrayToJson(birds))
+
     }
+
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
-        val sBirds = savedInstanceState?.getString("isBird")
-        val type = object :TypeToken<ArrayList<Bird>>(){}.type
-        if (sBirds!=null)
-            birds=gson.fromJson(sBirds,type)
+        val sBirds = savedInstanceState?.getString("isBirds")
+
+        if (sBirds != null)
+            birds = jsons.arrayFromJson(sBirds)
+
     }
 
 
+    fun loadDataFromJson(name: String) {
+        val savedString = intent.getStringExtra(name)
 
+        val type = object : TypeToken<ArrayList<Bird>>() {}.type
 
-    fun loadDataFromJson(name:String){
-       val savedString= intent.getStringExtra(name)
-        val type = object :TypeToken<Bird>(){}.type
-        if(savedString!=null)
-        birds.add(gson.fromJson<Bird>(savedString,type))
+        if (savedString != null)
+            birds = gson.fromJson(savedString, type)
+
     }
-   /* fun loadData(){
-        val sp=getSharedPreferences("savedData", Context.MODE_PRIVATE)
-        birdString=sp.getString("sBirds",gson.toJson(birds))
 
-        val type = object :TypeToken<ArrayList<Bird>>(){}.type
-
-        birds=gson.fromJson(birdString,type)
-    }*/
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_action_info, menu)
         return true
     }
 
+    fun <T> toJson(list: ArrayList<T>): String {
+        val objString = gson.toJson(list)
+        return objString
+    }
+
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.action_about-> {
-            val intentAbout = Intent(this,AddActivity::class.java)
-            startActivity(intentAbout)
+        R.id.action_about -> {
+            val intentAbout = Intent(this, AddActivity::class.java)
+
+            intentAbout.putExtra("wBird", toJson(birds))
+
+            startActivityForResult(intentAbout, 1)
             true
 
         }
-        else->false
+        else -> false
 
-    }}
+    }
+}

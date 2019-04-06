@@ -1,61 +1,116 @@
 package com.example.iambirdmotherf
 
+import android.annotation.TargetApi
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
+import android.provider.MediaStore
 import android.support.annotation.RequiresApi
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import com.google.android.gms.tasks.Task
+import com.google.firebase.ml.vision.FirebaseVision
+import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add.*
 import java.time.LocalDate
 
-class AddActivity : AppCompatActivity(){
+class AddActivity : AppCompatActivity() {
 
-    var pictures = arrayOf("Bird1","Bird2","Bird3","Bird4")
-    var picUrls=arrayOf("https://d1ia71hq4oe7pn.cloudfront.net/og/75335251-1200px.jpg",
-        "https://www.birdlife.org/sites/default/files/styles/1600/public/news/european_turtle_dove_streptopelia_turtur_websitec_revital_salomon.jpg?itok=FaPEfAzi",
-        "https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/04/10/19/pinyon-jay-bird.jpg",
-        "https://content.presspage.com/uploads/1763/1920_year-of-the-bird-george-grall.jpg?10000")
+
     // Create an ArrayAdapter using a simple spinner layout and languages array
-
-
-
-
-
-
+    val jsons = Jsons()
+    var birds = ArrayList<Bird>()
 
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
+        birds = jsons.arrayFromJson(intent.getStringExtra("wBird"))
 
 
 
-if(picData.text.isNotEmpty()){
-        Picasso.get().load(picData.text.toString()).into(imageView)}
         addButton.setOnClickListener {
-            val intent = Intent(this,MainActivity::class.java)
-
-            if (nameData.text.isNotEmpty()&&tagsData.text.isNotEmpty()&&picData.text.isNotEmpty()){
-                val bird=Bird(nameData.text.toString(),picData.text.toString(),tagsData.text.toString(),LocalDate.now().toString())
-
-                //birdList.add(Bird(nameData.text.toString(),picData.text.toString(),tagsData.text.toString(),LocalDate.now().toString()))
-                saveDataToJson("sBird",intent,bird)
-
-               startActivity(intent)
+            this.getTagsFromUrl(picData.text.toString())
         }
 
     }
+
+    fun getTagsFromUrl(url: String) {
+
+
+        Picasso.get().load(url).into(object : com.squareup.picasso.Target {
+
+
+            @TargetApi(Build.VERSION_CODES.O)
+            @androidx.annotation.RequiresApi(Build.VERSION_CODES.O)
+            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+
+                imageView.setImageBitmap(bitmap)
+                val vision = FirebaseVisionImage.fromBitmap(bitmap!!)
+                val labeler = FirebaseVision.getInstance().getOnDeviceImageLabeler()
+                labeler.processImage(vision)
+
+                    .addOnSuccessListener {
+
+
+                        val intent = Intent(this@AddActivity, MainActivity::class.java)
+
+                        if (nameData.text.isNotEmpty() && picData.text.isNotEmpty()) {
+
+
+                            birds.add(
+                                Bird(
+                                    nameData.text.toString(),
+                                    picData.text.toString(),
+                                    it.map { it.text }.joinToString(" "),
+                                    LocalDate.now().toString()
+                                )
+                            )
+
+
+                            intent.putExtra("sBird", jsons.arrayToJson(birds))
+                            startActivity(intent)
+
+                            setResult(RESULT_OK, intent)
+                            finish()
+                        }
+                    }
+                    .addOnFailureListener {
+
+
+                        Log.wtf("LAB", it.message)
+
+                    }
+
+                Log.wtf("Pizdos:", "Zagruzivs")
+            }
+
+            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+                Log.wtf("Pizdos:", "Gruzus")
+
+            }
+
+            override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
+                Log.wtf("Pizdos:", "Ebanulsya")
+
+            }
+        })
+
+
+    }
 }
-    fun <T>saveDataToJson(name:String,intent: Intent,obj:T){
-        val gson = Gson()
-        val objString=gson.toJson(obj)
-        intent.putExtra(name,objString)
-    }}

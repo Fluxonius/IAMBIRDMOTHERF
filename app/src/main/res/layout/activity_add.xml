@@ -14,13 +14,6 @@
             android:id="@+id/nameText" android:layout_marginTop="40dp"
             app:layout_constraintTop_toTopOf="@+id/guideline" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"/>
-    <TextView
-            android:text="Tags"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tagsText" android:layout_marginTop="40dp"
-            app:layout_constraintTop_toBottomOf="@+id/nameText" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"/>
     <ImageView
             android:layout_width="278dp"
             android:layout_height="204dp" tools:srcCompat="@tools:sample/avatars"
@@ -41,21 +34,12 @@
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toTopOf="@+id/guideline" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/tagsData"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/nameData" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
     <TextView
             android:text="PictureUrl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/picText" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/tagsText" android:layout_marginTop="40dp"/>
+            app:layout_constraintTop_toBottomOf="@+id/nameText" android:layout_marginTop="40dp"/>
     <Button
             android:text="ADD"
             android:layout_width="wrap_content"
@@ -69,6 +53,15 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/picData" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/tagsData"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/nameData"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:id="@+id/textView" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/picData" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/addButton" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"/>
 </android.support.constraint.ConstraintLayout>
