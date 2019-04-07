@@ -112,6 +112,7 @@ class AddActivity : AppCompatActivity() {
 
             override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
                 Log.wtf("Pizdos:", "Ebanulsya")
+                Toast.makeText(this@AddActivity,"Invalid URL",Toast.LENGTH_SHORT).show()
 
             }
         })
