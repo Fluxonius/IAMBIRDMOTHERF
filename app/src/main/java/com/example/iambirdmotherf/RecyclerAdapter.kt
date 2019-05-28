@@ -1,17 +1,21 @@
 package com.example.iambirdmotherf
 
 
-import android.support.design.widget.Snackbar
+
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 
 
 class RecyclerAdapter(private val birds:ArrayList<Bird>):RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
+
+
 
     inner class ViewHolder (itemView: View):RecyclerView.ViewHolder(itemView){
         val pic:ImageView
@@ -24,6 +28,12 @@ class RecyclerAdapter(private val birds:ArrayList<Bird>):RecyclerView.Adapter<Re
            name=itemView.findViewById(R.id.item_name)
             tags=itemView.findViewById(R.id.item_tags)
             dates=itemView.findViewById(R.id.item_date)
+            itemView.setOnClickListener { v: View  ->
+
+            val intent=Intent(v.context,DescriptionActivity::class.java)
+
+            }
+
 
 
         }
@@ -35,6 +45,7 @@ class RecyclerAdapter(private val birds:ArrayList<Bird>):RecyclerView.Adapter<Re
             tags.text=bird.tags
             Picasso.get().load(bird.pic).into(pic)
         }
+
 
 
 }
@@ -55,7 +66,15 @@ class RecyclerAdapter(private val birds:ArrayList<Bird>):RecyclerView.Adapter<Re
 
 
     override fun onBindViewHolder(holder:ViewHolder, pos: Int) {
+        val jsons =Jsons()
+
       holder.bindBird(birds[pos])
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context,DescriptionActivity::class.java)
+            intent.putExtra("birdD",jsons.itemToJson(birds[pos]))
+            holder.itemView.context.startActivity(intent)
+        }
+
       //  holder.tags.text=labels[pos]
 
 

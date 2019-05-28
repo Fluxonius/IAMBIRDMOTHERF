@@ -45,3 +45,9 @@ _
 /app/src/main/res/drawable-anydpi/ic_add_img.xml,3\c\3c019e19c66db4e3026dee476b001110227e173a
 R
 "app/src/main/res/values/colors.xml,9\6\969faa2a5d9f5e8390e958d2c07f2cfd54676e6b
+s
+Capp/src/main/java/com/example/iambirdmotherf/DescriptionActivity.kt,2\2\223bfd3fba0c2ec3028a38596bba0f71eee07b43
+n
+>app/src/main/java/com/example/iambirdmotherf/RandomFragment.kt,d\b\db7983e95f6b428f224a7056eb4df83f4de54ff7
+l
+<app/src/main/java/com/example/iambirdmotherf/InfoFragment.kt,f\e\fee49eaf285e0e0b7c7717cbed2569fc0672b2d7

@@ -9,10 +9,12 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.card_layout.*
 
 class MainActivity : AppCompatActivity() {
     private var layoutManager: RecyclerView.LayoutManager? = null
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         loadDataFromJson("sBird")
@@ -32,6 +35,9 @@ class MainActivity : AppCompatActivity() {
         recycler_view.layoutManager = LinearLayoutManager(this)
 
         recycler_view.adapter = RecyclerAdapter(birds)
+
+
+
         val swipeHandler = object : SwipeToDeleteCallback(this) {
             override fun onSwiped(p0: RecyclerView.ViewHolder, p1: Int) {
                 val adapter = recycler_view.adapter as RecyclerAdapter
