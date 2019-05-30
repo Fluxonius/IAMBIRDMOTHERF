@@ -20,35 +20,26 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class SimilarFragment : Fragment() {
-/*
-
-    val jsons=Jsons()
-
-    private lateinit var data: ArrayList<Bird>
-
     companion object {
-        private const val DATA_KEY = "data"
-       // private const val LIST_KEY = "test"
+
+        private const val KEY = "data"
 
         @JvmStatic
-        fun newInstance(element: Bird, array: ArrayList<Bird>) =
+        fun newInstance(url: String) =
             SimilarFragment().apply {
                 arguments = Bundle().apply {
-                    putString(DATA_KEY, jsons.itemToJson(element))
-                  //  putParcelableArrayList(LIST_KEY, array)
+                    putString(KEY, url)
                 }
             }
     }
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_similar, container, false)
 
-        val element =jsons.itemFromJson(arguments?.getString(DATA_KEY)!!)
-       // val list = arguments?.getParcelableArrayList<DataItem>(LIST_KEY)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?
+    ): View? {
+
+        val view = inflater.inflate(R.layout.fragment_similar, container, false)
 
         val img1 = view.findViewById<ImageView>(R.id.img1)
         val img2 = view.findViewById<ImageView>(R.id.img2)
@@ -56,25 +47,21 @@ class SimilarFragment : Fragment() {
         val img4 = view.findViewById<ImageView>(R.id.img4)
         val img5 = view.findViewById<ImageView>(R.id.img5)
         val img6 = view.findViewById<ImageView>(R.id.img6)
-
         val imgList: ArrayList<ImageView> = arrayListOf(img1, img2, img3, img4, img5, img6)
 
-        val similars = getSimilars(list!!, element!!)
+        var urls: ArrayList<String> = ArrayList()
+        urls.add("https://pp.userapi.com/c846323/v846323365/1ce85/Pbb6Ok8XDk0.jpg?ava=1")
+        urls.add("https://memepedia.ru/wp-content/uploads/2018/06/zhmyh-valakas.jpg")
+        urls.add("https://v-s.mobi/cITYLDjUMm9K5N9esBfv_tInFYfQS0N184WIse1WmX3uvYmDMOWs41VU9-r_KtHb/HQ.jpg")
+        urls.add("https://img.youtube.com/vi/zTLmrOr8RxU/mqdefault.jpg")
+        urls.add("https://scontent-yyz1-1.cdninstagram.com/vp/0ce97df59059677686a7e5abcc134e62/5D80933C/t51.2885-15/e35/43338301_260332068170042_2837399119156014424_n.jpg?_nc_ht=scontent-yyz1-1.cdninstagram.com")
+        urls.add("https://pbs.twimg.com/media/Dnw2u9IWkAAnJzV.jpg")
 
-        for (i in 0 until minOf(similars.size, 6)) {
+        for (i in 0..5) {
             imgList[i].visibility = View.VISIBLE
-            Picasso.get().load(similars[i].url).into(imgList[i])
-
+            Picasso.get().load(urls[i]).into(imgList[i])
         }
 
         return view
     }
-
-    private fun getSimilars(data: ArrayList<Bird>, element: Bird): List<Bird> {
-        val index = data.indexOf(element)
-        val result = data
-      result.removeAt(index)
-        return result.filter { !it.tags.intersect(element.tags).isEmpty() }
-    }
-*/
 }

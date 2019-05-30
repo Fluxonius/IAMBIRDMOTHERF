@@ -36,20 +36,20 @@ class DescriptionActivity : AppCompatActivity(){
         setContentView(R.layout.activity_description)
         fragmentManager = supportFragmentManager
 
-       // val data = intent.getParcelableArrayListExtra<DataItem>(ARRAY)
+
         val jsons=Jsons()
         val birdC =jsons.itemFromJson(intent.getStringExtra("birdD"))
-       // val position = intent.getIntExtra(POSITION, 0)
+
 
         bigPhotoFragment = InfoFragment.newInstance(birdC.pic)
         detailsFragment = RandomFragment.newInstance(birdC)
-       // similarsFragment = SimilarsFragment.newInstance(data[position], data)
+        similarsFragment = SimilarFragment.newInstance(birdC.pic)
 
         fragmentManager.beginTransaction().add(R.id.activity_description, bigPhotoFragment, "photo").commit()
         fragmentManager.beginTransaction().add(R.id.activity_description, detailsFragment, "details").commit()
-      //  fragmentManager.beginTransaction().add(R.id.activity_fragment, similarsFragment, "similars").commit()
+       fragmentManager.beginTransaction().add(R.id.activity_description, similarsFragment, "similars").commit()
         fragmentManager.beginTransaction().hide(detailsFragment).commit()
-        //fragmentManager.beginTransaction().hide(similarsFragment).commit()
+        fragmentManager.beginTransaction().hide(similarsFragment).commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -71,14 +71,14 @@ class DescriptionActivity : AppCompatActivity(){
     private fun swapFragments() {
         if (isSwapped){
             fragmentManager.beginTransaction().hide(detailsFragment).commit()
-           // fragmentManager.beginTransaction().hide(similarsFragment).commit()
+           fragmentManager.beginTransaction().hide(similarsFragment).commit()
             fragmentManager.beginTransaction().show(bigPhotoFragment).commit()
             isSwapped = !isSwapped
 
         } else{
             fragmentManager.beginTransaction().hide(bigPhotoFragment).commit()
             fragmentManager.beginTransaction().show(detailsFragment).commit()
-          //  fragmentManager.beginTransaction().show(similarsFragment).commit()
+            fragmentManager.beginTransaction().show(similarsFragment).commit()
             isSwapped = !isSwapped
         }
 

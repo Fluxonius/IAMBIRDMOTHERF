@@ -51,3 +51,17 @@ n
 >app/src/main/java/com/example/iambirdmotherf/RandomFragment.kt,d\b\db7983e95f6b428f224a7056eb4df83f4de54ff7
 l
 <app/src/main/java/com/example/iambirdmotherf/InfoFragment.kt,f\e\fee49eaf285e0e0b7c7717cbed2569fc0672b2d7
+`
+0app/src/main/res/layout/activity_description.xml,5\8\583f3577ebb8b39d2176e74a5b1149694c73a7e6
+Y
+)app/src/main/res/layout/fragment_info.xml,4\9\494c3c659849eaf83d9d4439a7ec54a743f576a3
+[
++app/src/main/res/layout/fragment_random.xml,8\7\87b854234660dcb1eb9dc75b335cc4d8662e3a5e
+\
+,app/src/main/res/layout/fragment_similar.xml,0\6\06e3e70ec1fc493d26a3f241d097e0ba87798655
+U
+%app/src/main/res/menu/menu_change.xml,4\4\443e68dd2ec033cc4f7587fbecfff15801ff5a79
+S
+#app/src/main/res/values/strings.xml,d\2\d2281fbb3027de2722081a53408dd77628bf080e
+o
+?app/src/main/java/com/example/iambirdmotherf/SimilarFragment.kt,c\6\c6de6a2df39656147a257b2d7ada0d40344fbc52
